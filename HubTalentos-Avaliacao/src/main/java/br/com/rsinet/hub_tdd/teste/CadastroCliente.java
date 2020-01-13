@@ -1,4 +1,4 @@
-package br.com.rsinet.hub_tdd;
+package br.com.rsinet.hub_tdd.teste;
 
 import java.util.concurrent.TimeUnit;
 
@@ -9,6 +9,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
+
+import br.com.rsinet.hub_tdd.page.PageRegister;
 
 public class CadastroCliente {
 
@@ -50,5 +52,6 @@ public class CadastroCliente {
 		registerPage.elementCheckConditionsOfUse.click();
 		registerPage.elementButtonRegister.click();
 	}
+	
 
 }

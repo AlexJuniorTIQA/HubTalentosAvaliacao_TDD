@@ -7,7 +7,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -34,32 +34,33 @@ public class CadastroCliente {
 	
 	@After
 	public void finaliza() throws IOException {
-		Screenshot.getScreenShot(driver, "TestNewUser");
+		
+		driver.quit();
 	}
 
 	@Test
 	public void NovoUsuario() throws Exception {
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		PageRegister registerPage = PageFactory.initElements(driver, PageRegister.class);
-        ExcelUtils.setExcelFile(Constant.File_TestData,"Planilha1");
+        ExcelUtils.setExcelFile(Constant.File_DataUserRegister,"Users");
 		
-		homePage.elementIconeUser.click();
+		homePage.elementIconUser.click();
 		homePage.elementCreatNewAccount.sendKeys(Keys.ENTER);
 		
-		registerPage.setUserName(ExcelUtils.getCellData(1,1));
-		registerPage.setEmail(ExcelUtils.getCellData(1,2));
-		registerPage.setPassword(ExcelUtils.getCellData(1,3));
-		registerPage.setConfirmPassword(ExcelUtils.getCellData(1,3));
+		registerPage.setUserName(ExcelUtils.getCellData(2,1));
+		registerPage.setEmail(ExcelUtils.getCellData(2,2));
+		registerPage.setPassword(ExcelUtils.getCellData(2,3));
+		registerPage.setConfirmPassword(ExcelUtils.getCellData(2,3));
 
-		registerPage.setFirstName(ExcelUtils.getCellData(1,4));
-		registerPage.setLastName(ExcelUtils.getCellData(1,5));
-		registerPage.setPhoneNumber(ExcelUtils.getCellData(1,6));
+		registerPage.setFirstName(ExcelUtils.getCellData(2,4));
+		registerPage.setLastName(ExcelUtils.getCellData(2,5));
+		registerPage.setPhoneNumber(ExcelUtils.getCellData(2,6));
 
-		registerPage.selectCountry(ExcelUtils.getCellData(1,7));
-		registerPage.setCity(ExcelUtils.getCellData(1,8));
-		registerPage.setAdress(ExcelUtils.getCellData(1,9));
-		registerPage.setState(ExcelUtils.getCellData(1,10));
-		registerPage.setPostalCode(ExcelUtils.getCellData(1,11));
+		registerPage.selectCountry(ExcelUtils.getCellData(2,7));
+		registerPage.setCity(ExcelUtils.getCellData(2,8));
+		registerPage.setAdress(ExcelUtils.getCellData(2,9));
+		registerPage.setState(ExcelUtils.getCellData(2,10));
+		registerPage.setPostalCode(ExcelUtils.getCellData(2,11));
 	
 		registerPage.elementCheckReceiveOffersByEmail.click();
 		registerPage.elementCheckConditionsOfUse.click();
@@ -67,8 +68,8 @@ public class CadastroCliente {
 		
 		
 		Thread.sleep(2000);
-		Assert.assertEquals(ExcelUtils.getCellData(1, 1), homePage.elementUserLink.getText());
-		
+		Assert.assertEquals(ExcelUtils.getCellData(2, 1), homePage.elementUserLink.getText());
+		Screenshot.getScreenShot(driver, "TesteNovoUsuário ");
 	}
 	
 

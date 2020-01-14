@@ -69,7 +69,7 @@ public class PageRegister {
 
 	public WebElement elementCheckConditionsOfUse;
 
-	@FindBy(how = How.NAME, using = "register_btnundefined")
+	@FindBy(how = How.XPATH, using = "//*[@id=\"register_btnundefined\"]")
 
 	public WebElement elementButtonRegister;
 
@@ -87,7 +87,7 @@ public class PageRegister {
 		elementUserName.sendKeys(username);
 	}
 
-	public void setEmai(String email) {
+	public void setEmail(String email) {
 		elementEmail.sendKeys(email);
 	}
 

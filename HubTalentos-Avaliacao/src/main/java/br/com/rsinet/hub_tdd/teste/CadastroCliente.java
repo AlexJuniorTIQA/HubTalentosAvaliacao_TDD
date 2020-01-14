@@ -1,16 +1,28 @@
 package br.com.rsinet.hub_tdd.teste;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FileUtils;
+import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestName;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 
 import br.com.rsinet.hub_tdd.page.PageRegister;
+import br.com.rsinet.hub_tdd.teste.data.Constant;
+import br.com.rsinet.hub_tdd.teste.data.ExcelUtils;
+import br.com.rsinet.hub_tdd.teste.data.Screenshot;
 
 public class CadastroCliente {
 
@@ -22,35 +34,44 @@ public class CadastroCliente {
 		driver = new ChromeDriver();
 		driver.get("https://www.advantageonlineshopping.com/");
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		
+	}
+	
+	@Rule
+	public TestName testName = new TestName();
+	@After
+	public void finaliza() throws IOException {
+		Screenshot.getScreenShot(driver);// verificar está devolvendo nulo, ver video udemy
 	}
 
 	@Test
-	public void NovoUsuario() throws InterruptedException {
-		// Instancia á Página de Registro como uma PageFactory
+	public void NovoUsuario() throws Exception {
 		PageRegister registerPage = PageFactory.initElements(driver, PageRegister.class);
+        ExcelUtils.setExcelFile(Constant.File_TestData,"Planilha1");
+		
 		
 		driver.findElement(By.id("menuUser")).click();
 		driver.findElement(By.xpath("/html/body/login-modal/div/div/div[3]/a[2]")).sendKeys(Keys.ENTER);
 
-		registerPage.setUserName("Excel");
-		registerPage.setEmai("Excel");
-		registerPage.setPassword("Excel");
-		registerPage.setConfirmPassword("Excel");
+		
+		registerPage.setUserName(ExcelUtils.getCellData(1,1));
+		registerPage.setEmail(ExcelUtils.getCellData(1,2));
+		registerPage.setPassword(ExcelUtils.getCellData(1,3));
+		registerPage.setConfirmPassword(ExcelUtils.getCellData(1,3));
 
-		registerPage.setFirstName("Excel");
-		registerPage.setLastName("Excel");
-		registerPage.setPhoneNumber("Excel");
+		registerPage.setFirstName(ExcelUtils.getCellData(1,4));
+		registerPage.setLastName(ExcelUtils.getCellData(1,5));
+		registerPage.setPhoneNumber(ExcelUtils.getCellData(1,6));
 
-		registerPage.selectCountry("Virgin Islands (USA)");
-		registerPage.setCity("Excel");
-		registerPage.setAdress("Excel");
-		registerPage.setState("Excel");
-		registerPage.setPostalCode("Excel");
+		registerPage.selectCountry(ExcelUtils.getCellData(1,7));
+		registerPage.setCity(ExcelUtils.getCellData(1,8));
+		registerPage.setAdress(ExcelUtils.getCellData(1,9));
+		registerPage.setState(ExcelUtils.getCellData(1,10));
+		registerPage.setPostalCode(ExcelUtils.getCellData(1,11));
 
 		registerPage.elementCheckReceiveOffersByEmail.click();
 		registerPage.elementCheckConditionsOfUse.click();
 		registerPage.elementButtonRegister.click();
+		
 	}
 	
 

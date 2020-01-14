@@ -7,6 +7,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -28,8 +29,10 @@ public class ConsultaProdutoTelaPrincipal {
 	public void Inicializa() throws InterruptedException {
 		
 		driver = new ChromeDriver();
+		driver.manage().window().setSize(new Dimension(1200, 800));
 		driver.get("https://www.advantageonlineshopping.com/");
-		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		
 	}
 	
 	@After
@@ -46,7 +49,7 @@ public class ConsultaProdutoTelaPrincipal {
 		
 		homePage.elementIconSearch.click();
 		homePage.setSearch(ExcelUtils.getCellData(2, 1));
-		homePage.findElementLinkText(ExcelUtils.getCellData(2, 1));
+		driver.findElement(By.className("roboto-regular ng-binding")).click();
 		
 	}
 }

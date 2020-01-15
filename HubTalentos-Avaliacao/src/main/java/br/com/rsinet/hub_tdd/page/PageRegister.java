@@ -78,6 +78,9 @@ public class PageRegister {
 
 		this.driver = driver;
 	}
+	
+
+
 
 	/**
 	 * Methods Account Details
@@ -137,6 +140,12 @@ public class PageRegister {
 
 	public void setPostalCode(String postalCode) {
 		elementPostalCode.sendKeys(postalCode);
+	}
+	public void clickCheckConditionsOfUse() {
+		elementCheckConditionsOfUse.click();
+	}
+	public void clickButtonRegister() {
+		elementButtonRegister.click();
 	}
 
 	

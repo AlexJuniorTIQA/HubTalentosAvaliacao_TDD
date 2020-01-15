@@ -7,17 +7,18 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 
+import br.com.rsinet.hub_tdd.files.Constant;
+import br.com.rsinet.hub_tdd.files.ExcelUtils;
+import br.com.rsinet.hub_tdd.files.Screenshot;
 import br.com.rsinet.hub_tdd.page.HomePage;
 import br.com.rsinet.hub_tdd.page.PageRegister;
-import br.com.rsinet.hub_tdd.teste.data.Constant;
-import br.com.rsinet.hub_tdd.teste.data.ExcelUtils;
-import br.com.rsinet.hub_tdd.teste.data.Screenshot;
 
 public class CadastroCliente {
 
@@ -34,18 +35,17 @@ public class CadastroCliente {
 	
 	@After
 	public void finaliza() throws IOException {
-		
 		driver.quit();
 	}
 
 	@Test
-	public void NovoUsuario() throws Exception {
+	public void NovoUsuarioComSucesso() throws Exception {
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		PageRegister registerPage = PageFactory.initElements(driver, PageRegister.class);
         ExcelUtils.setExcelFile(Constant.File_DataUserRegister,"Users");
 		
-		homePage.elementIconUser.click();
-		homePage.elementCreatNewAccount.sendKeys(Keys.ENTER);
+		homePage.clickIconuser();
+		homePage.clickCreatNewAccount();
 		
 		registerPage.setUserName(ExcelUtils.getCellData(2,1));
 		registerPage.setEmail(ExcelUtils.getCellData(2,2));
@@ -62,15 +62,12 @@ public class CadastroCliente {
 		registerPage.setState(ExcelUtils.getCellData(2,10));
 		registerPage.setPostalCode(ExcelUtils.getCellData(2,11));
 	
-		registerPage.elementCheckReceiveOffersByEmail.click();
-		registerPage.elementCheckConditionsOfUse.click();
-		registerPage.elementButtonRegister.click();
-		
-		
-		Thread.sleep(2000);
-		Assert.assertEquals(ExcelUtils.getCellData(2, 1), homePage.elementUserLink.getText());
-		Screenshot.getScreenShot(driver, "TesteNovoUsuário ");
-	}
-	
+		registerPage.clickCheckConditionsOfUse();
+		registerPage.clickButtonRegister();
 
+		homePage.waitHome();
+		
+		homePage.assertEqualsUser(ExcelUtils.getCellData(2,1));
+		Screenshot.getScreenShot(driver, "TesteNovoUsuárioComSucesso ");
+	}
 }

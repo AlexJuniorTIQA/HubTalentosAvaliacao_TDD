@@ -27,7 +27,6 @@ public class ConsultaTelaInicial {
 	@Before
 	public void Inicializa() throws InterruptedException {
 		driver = new ChromeDriver();
-		driver.manage().window().setSize(new Dimension(1336, 768));
 		driver.get("https://www.advantageonlineshopping.com/");
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 	}

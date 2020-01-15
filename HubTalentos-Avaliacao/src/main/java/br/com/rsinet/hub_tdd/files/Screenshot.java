@@ -1,4 +1,4 @@
-package br.com.rsinet.hub_tdd.teste.data;
+package br.com.rsinet.hub_tdd.files;
 
 
 	import java.io.File;

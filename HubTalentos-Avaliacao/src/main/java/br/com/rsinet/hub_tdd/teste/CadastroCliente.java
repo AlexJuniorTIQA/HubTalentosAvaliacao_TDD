@@ -17,6 +17,7 @@ import org.openqa.selenium.support.PageFactory;
 import br.com.rsinet.hub_tdd.files.Constant;
 import br.com.rsinet.hub_tdd.files.ExcelUtils;
 import br.com.rsinet.hub_tdd.files.Screenshot;
+import br.com.rsinet.hub_tdd.page.DriverElement;
 import br.com.rsinet.hub_tdd.page.HomePage;
 import br.com.rsinet.hub_tdd.page.PageRegister;
 
@@ -25,12 +26,12 @@ public class CadastroCliente {
 	private WebDriver driver;
 	
 
+
 	@Before
 	public void Inicializa() throws InterruptedException {
-		
-		driver = new ChromeDriver();
-		driver.get("https://www.advantageonlineshopping.com/");
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		DriverElement element = new DriverElement();
+		driver = element.getChromeDriver(driver);
+
 	}
 	
 	@After
@@ -41,33 +42,41 @@ public class CadastroCliente {
 	@Test
 	public void NovoUsuarioComSucesso() throws Exception {
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
-		PageRegister registerPage = PageFactory.initElements(driver, PageRegister.class);
+		PageRegister pageRegister = PageFactory.initElements(driver, PageRegister.class);
         ExcelUtils.setExcelFile(Constant.File_DataUserRegister,"Users");
 		
 		homePage.clickIconuser();
 		homePage.clickCreatNewAccount();
 		
-		registerPage.setUserName(ExcelUtils.getCellData(2,1));
-		registerPage.setEmail(ExcelUtils.getCellData(2,2));
-		registerPage.setPassword(ExcelUtils.getCellData(2,3));
-		registerPage.setConfirmPassword(ExcelUtils.getCellData(2,3));
-
-		registerPage.setFirstName(ExcelUtils.getCellData(2,4));
-		registerPage.setLastName(ExcelUtils.getCellData(2,5));
-		registerPage.setPhoneNumber(ExcelUtils.getCellData(2,6));
-
-		registerPage.selectCountry(ExcelUtils.getCellData(2,7));
-		registerPage.setCity(ExcelUtils.getCellData(2,8));
-		registerPage.setAdress(ExcelUtils.getCellData(2,9));
-		registerPage.setState(ExcelUtils.getCellData(2,10));
-		registerPage.setPostalCode(ExcelUtils.getCellData(2,11));
-	
-		registerPage.clickCheckConditionsOfUse();
-		registerPage.clickButtonRegister();
+		pageRegister.setUser(3, driver);
+		
+		pageRegister.clickCheckConditionsOfUse();
+		pageRegister.clickButtonRegister();
 
 		homePage.waitHome();
-		
-		homePage.assertEqualsUser(ExcelUtils.getCellData(2,1));
+
+		homePage.assertEqualsUser(ExcelUtils.getCellData(3,1));
 		Screenshot.getScreenShot(driver, "TesteNovoUsuárioComSucesso ");
+	}
+	
+	
+	
+	@Test
+	public void NovoUsuarioComFalhaB() throws Exception {
+		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
+		PageRegister pageRegister = PageFactory.initElements(driver, PageRegister.class);
+        ExcelUtils.setExcelFile(Constant.File_DataUserRegister,"Users");
+		
+		homePage.clickIconuser();
+		homePage.clickCreatNewAccount();
+		
+		pageRegister.setUser(3, driver);
+
+		pageRegister.clickCheckConditionsOfUse();
+		pageRegister.clickButtonRegisterFail();
+		
+		
+		pageRegister.assertEqualsRegister("User name already exists");
+		Screenshot.getScreenShot(driver, "TesteNovoUsuárioComFalha ");
 	}
 }

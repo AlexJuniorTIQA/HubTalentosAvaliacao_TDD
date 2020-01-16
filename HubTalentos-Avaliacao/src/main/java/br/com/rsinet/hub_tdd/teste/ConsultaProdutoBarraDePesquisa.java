@@ -19,6 +19,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import br.com.rsinet.hub_tdd.files.Constant;
 import br.com.rsinet.hub_tdd.files.ExcelUtils;
 import br.com.rsinet.hub_tdd.files.Screenshot;
+import br.com.rsinet.hub_tdd.page.DriverElement;
 import br.com.rsinet.hub_tdd.page.HomePage;
 import br.com.rsinet.hub_tdd.page.ProductPage;
 
@@ -29,31 +30,42 @@ public class ConsultaProdutoBarraDePesquisa {
 
 	@Before
 	public void Inicializa() throws InterruptedException {
-		driver = new ChromeDriver();
-		driver.get("https://www.advantageonlineshopping.com/");
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		
+		DriverElement element = new DriverElement();
+		driver = element.getChromeDriver(driver);
 	}
 	@After
 	public void finaliza() throws IOException {
-	driver.quit();
+	//driver.quit();
 	}
 	@Test
-	public void ConsultarProduto ()throws Exception  {
+	public void ConsultarProdutoComSucesso ()throws Exception  {
+		
+		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
+		ProductPage productPage = PageFactory.initElements(driver, ProductPage.class);
+		ExcelUtils.setExcelFile(Constant.File_DataUserRegister,"Headphone");
+	
+		homePage.clickIconSearch();
+		
+		homePage.setSearch(ExcelUtils.getCellData(1, 1));
+		homePage.findElementLinkText(ExcelUtils.getCellData(1, 1)); 
+		
+		productPage.assertEqualsProduct(ExcelUtils.getCellData(1,1));
+		Screenshot.getScreenShot(driver, "TesteConsultaProdutoComSucesso ");
+	}
+	
+	@Test
+	public void ConsultarProdutoFalha() throws Exception {
 		
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		ProductPage productPage = PageFactory.initElements(driver, ProductPage.class);
 		ExcelUtils.setExcelFile(Constant.File_DataUserRegister,"Headphone");
 			
-		homePage.javaScriptClick(By.id("miceTxt")); 
-		homePage.setSearch(ExcelUtils.getCellData(2, 1) + Keys.ENTER);
-		homePage.findElementLinkText(ExcelUtils.getCellData(2, 1)); 
+		homePage.clickIconSearch(); 
+		homePage.setSearch(ExcelUtils.getCellData(6, 1));
 		
-		productPage.assertEqualsProduct(ExcelUtils.getCellData(2,1));
-		
-		Screenshot.getScreenShot(driver, "TesteConsultaProduto ");
-		
-		
-		
+		productPage.assertEqualsProductFail(ExcelUtils.getCellData(6,1));
+		Screenshot.getScreenShot(driver, "TesteConsultaProdutoFalha ");
+
 	}
+
 }

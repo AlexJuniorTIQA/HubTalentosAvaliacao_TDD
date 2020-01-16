@@ -24,38 +24,38 @@ public class HomePage {
 
 	@FindBy(how = How.ID, using = "menuSearch")
 
-	public WebElement elementIconSearch;
+	private WebElement elementIconSearch;
 
 	@FindBy(how = How.ID, using = "autoComplete")
 
-	public WebElement elementSearch;
+	private WebElement elementSearch;
 
 	@FindBy(how = How.XPATH, using = "/html/body/login-modal/div/div/div[3]/a[2]")
 
-	public WebElement elementCreatNewAccount;
+	private WebElement elementCreatNewAccount;
 
 	@FindBy(how = How.ID, using = "tabletsTxt")
 
-	public WebElement elementTablets;
+	private WebElement elementTablets;
 
 	@FindBy(how = How.ID, using = "headphonesTxt")
 
-	public WebElement elementHeadPhones;
+	private WebElement elementHeadPhones;
 
 	@FindBy(how = How.ID, using = "speakersTxt")
 
-	public WebElement elementSpeakers;
+	private WebElement elementSpeakers;
 
 	@FindBy(how = How.ID, using = "laptopsTxt")
 
-	public WebElement elementLaptops;
+	private WebElement elementLaptops;
 
 	@FindBy(how = How.ID, using = "miceTxt")
 
-	public WebElement elementMice;
+	private WebElement elementMice;
 
 	@FindBy(how = How.XPATH, using = "/html/body/header/nav/ul/li[3]/a/span")
-	public WebElement elementUserLink;
+	private WebElement elementUserLink;
 
 	public HomePage(WebDriver driver) {
 
@@ -92,6 +92,8 @@ public class HomePage {
 	public void assertEqualsUser(String expected) {
 		Assert.assertEquals(expected, elementUserLink.getText());
 	}
-	
+	public void clickIconSearch() {
+		elementIconSearch.click();
+	}
 
 }

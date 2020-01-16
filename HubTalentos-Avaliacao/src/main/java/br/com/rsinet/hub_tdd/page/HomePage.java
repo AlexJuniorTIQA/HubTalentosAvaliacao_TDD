@@ -79,7 +79,7 @@ public class HomePage {
 	}
 
 	public void setSearch(String search) {
-		elementSearch.sendKeys(search);
+		elementSearch.sendKeys(search + Keys.ENTER);
 	}
 	
 	

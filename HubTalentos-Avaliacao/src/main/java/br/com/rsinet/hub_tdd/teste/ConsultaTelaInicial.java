@@ -42,7 +42,6 @@ public class ConsultaTelaInicial {
 		
 		homePage.javaScriptClick(By.id("miceTxt"));
 		homePage.findElementLinkText(ExcelUtils.getCellData(3, 1));
-
 		productPage.assertEqualsProduct(ExcelUtils.getCellData(3, 1));
 		Screenshot.getScreenShot(driver, "TesteConsultaTelaPrincipalSucesso ");
 	}

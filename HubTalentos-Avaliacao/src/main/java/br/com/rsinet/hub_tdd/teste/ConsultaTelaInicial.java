@@ -15,6 +15,7 @@ import org.openqa.selenium.support.PageFactory;
 import br.com.rsinet.hub_tdd.files.Constant;
 import br.com.rsinet.hub_tdd.files.ExcelUtils;
 import br.com.rsinet.hub_tdd.files.Screenshot;
+import br.com.rsinet.hub_tdd.page.DriverElement;
 import br.com.rsinet.hub_tdd.page.HomePage;
 import br.com.rsinet.hub_tdd.page.ProductPage;
 
@@ -26,9 +27,8 @@ public class ConsultaTelaInicial {
 
 	@Before
 	public void Inicializa() throws InterruptedException {
-		driver = new ChromeDriver();
-		driver.get("https://www.advantageonlineshopping.com/");
-		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		DriverElement element = new DriverElement();
+		driver = element.getChromeDriver(driver);
 	}
 	@After
 	public void finaliza() throws IOException {

@@ -13,14 +13,16 @@ public class ProductPage {
 	final WebDriver driver;
 	
 	@FindBy(how = How.XPATH, using = "/html/body/div[3]/nav/a[3]")
-	public WebElement elementProductName;
+	private WebElement elementProductName;
 	
 	@FindBy(how = How.NAME, using = "save_to_cart")
-	public WebElement elementAddToCart;
+	private WebElement elementAddToCart;
 	
 	@FindBy(how = How.ID, using = "menuCart")
-	public WebElement elementMenuCart;
+	private WebElement elementMenuCart;
 	
+	@FindBy(how = How.XPATH, using = "/html/body/div[3]/section/article/div[3]/div/label/span")
+	private WebElement elementNotFound;
 	
 	
 	public ProductPage(WebDriver driver) {
@@ -30,6 +32,9 @@ public class ProductPage {
 	
 	public void assertEqualsProduct(String expected) {
 		Assert.assertEquals(expected.toUpperCase(), elementProductName.getText());
+	}
+	public void assertEqualsProductFail(String expected) {
+		Assert.assertEquals("No results for \""+expected+"\"", elementNotFound.getText());
 	}
 	
 }

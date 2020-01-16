@@ -1,11 +1,18 @@
 package br.com.rsinet.hub_tdd.page;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import br.com.rsinet.hub_tdd.files.Constant;
+import br.com.rsinet.hub_tdd.files.ExcelUtils;
 
 public class PageRegister {
 
@@ -13,65 +20,65 @@ public class PageRegister {
 	///////////// Elements: Account Details////////////////
 	@FindBy(how = How.NAME, using = "usernameRegisterPage")
 
-	public WebElement elementUserName;
+	private WebElement elementUserName;
 
 	@FindBy(how = How.NAME, using = "emailRegisterPage")
 
-	public WebElement elementEmail;
+	private WebElement elementEmail;
 
 	@FindBy(how = How.NAME, using = "passwordRegisterPage")
 
-	public WebElement elementPassword;
+	private WebElement elementPassword;
 	@FindBy(how = How.NAME, using = "confirm_passwordRegisterPage")
 
-	public WebElement elementConfirmPassword;
+	private WebElement elementConfirmPassword;
 
 	///////////// Elements: Personal Details////////////////
 	@FindBy(how = How.NAME, using = "first_nameRegisterPage")
 
-	public WebElement elementFirstName;
+	private WebElement elementFirstName;
 
 	@FindBy(how = How.NAME, using = "last_nameRegisterPage")
 
-	public WebElement elementLastName;
+	private WebElement elementLastName;
 
 	@FindBy(how = How.NAME, using = "phone_numberRegisterPage")
 
-	public WebElement elementPhoneNumber;
+	private WebElement elementPhoneNumber;
 /////////////Elements: Adress////////////////
 	@FindBy(how = How.NAME, using = "countryListboxRegisterPage")
 
-	public WebElement elementCountry;
+	private WebElement elementCountry;
 
 	@FindBy(how = How.NAME, using = "cityRegisterPage")
 
-	public WebElement elementCity;
+	private WebElement elementCity;
 
 	@FindBy(how = How.NAME, using = "addressRegisterPage")
 
-	public WebElement elementAdress;
+	private WebElement elementAdress;
 
 	@FindBy(how = How.NAME, using = "state_/_province_/_regionRegisterPage")
 
-	public WebElement elementState;
+	private WebElement elementState;
 
 	@FindBy(how = How.NAME, using = "postal_codeRegisterPage")
 
-	public WebElement elementPostalCode;
+	private WebElement elementPostalCode;
 
 /////////////Elements: Check Box////////////////
 
 	@FindBy(how = How.NAME, using = "allowOffersPromotion")
 
-	public WebElement elementCheckReceiveOffersByEmail;
+	private WebElement elementCheckReceiveOffersByEmail;
 
 	@FindBy(how = How.NAME, using = "i_agree")
 
-	public WebElement elementCheckConditionsOfUse;
+	private WebElement elementCheckConditionsOfUse;
 
 	@FindBy(how = How.XPATH, using = "//*[@id=\"register_btnundefined\"]")
 
-	public WebElement elementButtonRegister;
+	private WebElement elementButtonRegister;
 
 	////////////////////////////////////////////////////////
 	public PageRegister(WebDriver driver) {
@@ -147,6 +154,39 @@ public class PageRegister {
 	public void clickButtonRegister() {
 		elementButtonRegister.click();
 	}
+		
+	public void clickButtonRegisterFail() {
+		elementButtonRegister.click();
+		elementButtonRegister.click();
+		elementButtonRegister.click();
+		elementButtonRegister.click();
+		elementButtonRegister.click();
+	}
+	
+	public void setUser(int number, WebDriver driver) throws Exception {
+		PageRegister registerPage = PageFactory.initElements(driver, PageRegister.class);
+		ExcelUtils.setExcelFile(Constant.File_DataUserRegister,"Users");
+		
+		registerPage.setUserName(ExcelUtils.getCellData(number,1));
+		registerPage.setEmail(ExcelUtils.getCellData(number,2));
+		registerPage.setPassword(ExcelUtils.getCellData(number,3));
+		registerPage.setConfirmPassword(ExcelUtils.getCellData(number,3));
 
+		registerPage.setFirstName(ExcelUtils.getCellData(number,4));
+		registerPage.setLastName(ExcelUtils.getCellData(number,5));
+		registerPage.setPhoneNumber(ExcelUtils.getCellData(number,6));
+
+		registerPage.selectCountry(ExcelUtils.getCellData(number,7));
+		registerPage.setCity(ExcelUtils.getCellData(number,8));
+		registerPage.setAdress(ExcelUtils.getCellData(number,9));
+		registerPage.setState(ExcelUtils.getCellData(number,10));
+		registerPage.setPostalCode(ExcelUtils.getCellData(number,11));
+
+	}
+	
+	public void assertEqualsRegister(String expected) {
+		Assert.assertEquals(expected,driver.findElement(By.xpath("/html/body/div[3]/section/article/sec-form/div[2]/label[1]")).getText());
+	}
+	
 	
 }

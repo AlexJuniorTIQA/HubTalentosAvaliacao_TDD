@@ -163,30 +163,11 @@ public class PageRegister {
 		elementButtonRegister.click();
 	}
 	
-	public void setUser(int number, WebDriver driver) throws Exception {
-		PageRegister registerPage = PageFactory.initElements(driver, PageRegister.class);
-		ExcelUtils.setExcelFile(Constant.File_DataUserRegister,"Users");
-		
-		registerPage.setUserName(ExcelUtils.getCellData(number,1));
-		registerPage.setEmail(ExcelUtils.getCellData(number,2));
-		registerPage.setPassword(ExcelUtils.getCellData(number,3));
-		registerPage.setConfirmPassword(ExcelUtils.getCellData(number,3));
-
-		registerPage.setFirstName(ExcelUtils.getCellData(number,4));
-		registerPage.setLastName(ExcelUtils.getCellData(number,5));
-		registerPage.setPhoneNumber(ExcelUtils.getCellData(number,6));
-
-		registerPage.selectCountry(ExcelUtils.getCellData(number,7));
-		registerPage.setCity(ExcelUtils.getCellData(number,8));
-		registerPage.setAdress(ExcelUtils.getCellData(number,9));
-		registerPage.setState(ExcelUtils.getCellData(number,10));
-		registerPage.setPostalCode(ExcelUtils.getCellData(number,11));
-
+	
+	public void assertEqualsRegisterFail() {
+		Assert.assertEquals("User name already exists",driver.findElement(By.xpath("/html/body/div[3]/section/article/sec-form/div[2]/label[1]")).getText());
 	}
 	
-	public void assertEqualsRegister(String expected) {
-		Assert.assertEquals(expected,driver.findElement(By.xpath("/html/body/div[3]/section/article/sec-form/div[2]/label[1]")).getText());
-	}
 	
 	
 }

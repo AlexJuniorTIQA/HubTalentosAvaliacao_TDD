@@ -29,13 +29,14 @@ public class ConsultaProdutoBarraDePesquisa {
 	
 
 	@Before
-	public void Inicializa() throws InterruptedException {
-		DriverElement element = new DriverElement();
-		driver = element.getChromeDriver(driver);
+	public void Inicializa() throws Exception {
+		
+		driver = DriverElement.getChromeDriver();
 	}
+	
 	@After
-	public void finaliza() throws IOException {
-	//driver.quit();
+	public void finaliza() {
+		DriverElement.quitDriver(driver);
 	}
 	@Test
 	public void ConsultarProdutoComSucesso ()throws Exception  {

@@ -28,15 +28,14 @@ public class CadastroCliente {
 
 
 	@Before
-	public void Inicializa() throws InterruptedException {
-		DriverElement element = new DriverElement();
-		driver = element.getChromeDriver(driver);
-
+	public void Inicializa() throws Exception {
+		
+		driver = DriverElement.getChromeDriver();
 	}
 	
 	@After
-	public void finaliza() throws IOException {
-		driver.quit();
+	public void finaliza() {
+		DriverElement.quitDriver(driver);
 	}
 
 	@Test
@@ -48,14 +47,27 @@ public class CadastroCliente {
 		homePage.clickIconuser();
 		homePage.clickCreatNewAccount();
 		
-		pageRegister.setUser(3, driver);
+		pageRegister.setUserName(ExcelUtils.getCellData(1,1));
+		pageRegister.setEmail(ExcelUtils.getCellData(1,2));
+		pageRegister.setPassword(ExcelUtils.getCellData(1,3));
+		pageRegister.setConfirmPassword(ExcelUtils.getCellData(1,3));
+
+		pageRegister.setFirstName(ExcelUtils.getCellData(1,4));
+		pageRegister.setLastName(ExcelUtils.getCellData(1,5));
+		pageRegister.setPhoneNumber(ExcelUtils.getCellData(1,6));
+
+		pageRegister.selectCountry(ExcelUtils.getCellData(1,7));
+		pageRegister.setCity(ExcelUtils.getCellData(1,8));
+		pageRegister.setAdress(ExcelUtils.getCellData(1,9));
+		pageRegister.setState(ExcelUtils.getCellData(1,10));
+		pageRegister.setPostalCode(ExcelUtils.getCellData(1,11));
 		
 		pageRegister.clickCheckConditionsOfUse();
 		pageRegister.clickButtonRegister();
 
 		homePage.waitHome();
 
-		homePage.assertEqualsUser(ExcelUtils.getCellData(3,1));
+		homePage.assertEqualsUser(ExcelUtils.getCellData(1,1));
 		Screenshot.getScreenShot(driver, "TesteNovoUsuárioComSucesso ");
 	}
 	
@@ -70,13 +82,26 @@ public class CadastroCliente {
 		homePage.clickIconuser();
 		homePage.clickCreatNewAccount();
 		
-		pageRegister.setUser(3, driver);
+		pageRegister.setUserName(ExcelUtils.getCellData(1,1));
+		pageRegister.setEmail(ExcelUtils.getCellData(1,2));
+		pageRegister.setPassword(ExcelUtils.getCellData(1,3));
+		pageRegister.setConfirmPassword(ExcelUtils.getCellData(1,3));
+
+		pageRegister.setFirstName(ExcelUtils.getCellData(1,4));
+		pageRegister.setLastName(ExcelUtils.getCellData(1,5));
+		pageRegister.setPhoneNumber(ExcelUtils.getCellData(1,6));
+
+		pageRegister.selectCountry(ExcelUtils.getCellData(1,7));
+		pageRegister.setCity(ExcelUtils.getCellData(1,8));
+		pageRegister.setAdress(ExcelUtils.getCellData(1,9));
+		pageRegister.setState(ExcelUtils.getCellData(1,10));
+		pageRegister.setPostalCode(ExcelUtils.getCellData(1,11));
 
 		pageRegister.clickCheckConditionsOfUse();
 		pageRegister.clickButtonRegisterFail();
 		
 		
-		pageRegister.assertEqualsRegister("User name already exists");
+		pageRegister.assertEqualsRegisterFail();
 		Screenshot.getScreenShot(driver, "TesteNovoUsuárioComFalha ");
 	}
 }

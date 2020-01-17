@@ -20,19 +20,20 @@ import br.com.rsinet.hub_tdd.page.HomePage;
 import br.com.rsinet.hub_tdd.page.ProductPage;
 
 
-public class ConsultaTelaInicial {
+public class ConsultaProdutoTelaInicial {
 
 	private WebDriver driver;
 	
 
 	@Before
-	public void Inicializa() throws InterruptedException {
-		DriverElement element = new DriverElement();
-		driver = element.getChromeDriver(driver);
+	public void Inicializa() throws Exception {
+		
+		driver = DriverElement.getChromeDriver();
 	}
+	
 	@After
-	public void finaliza() throws IOException {
-		driver.quit();
+	public void finaliza() {
+		DriverElement.quitDriver(driver);
 	}
 	@Test
 	public void ConsultarProdutoSucesso ()throws Exception  {

@@ -6,8 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-import br.com.rsinet.hub_tdd.files.ExcelUtils;
-
 public class ProductPage {
 
 	final WebDriver driver;

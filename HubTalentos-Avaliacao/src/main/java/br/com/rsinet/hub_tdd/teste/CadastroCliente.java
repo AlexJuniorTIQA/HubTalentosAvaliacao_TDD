@@ -1,17 +1,9 @@
 package br.com.rsinet.hub_tdd.teste;
 
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
-
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 
 import br.com.rsinet.hub_tdd.files.Constant;

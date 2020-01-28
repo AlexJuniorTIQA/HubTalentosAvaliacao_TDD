@@ -15,7 +15,7 @@ public class DriverElement {
 		driver = new ChromeDriver();
 		driver.get("https://www.advantageonlineshopping.com/");
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		driver.manage().window().setSize(new Dimension(1200, 800));
+		driver.manage().window().setSize(new Dimension(800, 600));
 		return driver;
 	}
 

@@ -54,6 +54,7 @@ public class ConsultaProdutoBarraDePesquisa {
 		homePage.clickIconSearch(); 
 		homePage.setSearch(ExcelUtils.getCellData(6, 1));
 		
+		productPage.waitElement(driver);
 		productPage.assertEqualsProductFail(ExcelUtils.getCellData(6,1));
 		Screenshot.getScreenShot(driver, "TesteConsultaProdutoFalha ");
 

@@ -1,6 +1,7 @@
 package br.com.rsinet.hub_tdd.page;
 
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -40,5 +41,10 @@ public class ProductPage {
 	
 	public void ClickEelementHPEliteBookFolioDetails() {
 		elementHPEliteBookFolioDetails.click(); 
+	}
+	
+	public void waitElement(WebDriver driver2) {
+		JavascriptExecutor js = (JavascriptExecutor) driver2;
+		js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 2000);");
 	}
 }

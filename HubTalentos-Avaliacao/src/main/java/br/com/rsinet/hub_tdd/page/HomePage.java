@@ -82,7 +82,8 @@ public class HomePage {
 	}
 
 	public void waitHome() throws InterruptedException {
-		Thread.sleep(2000);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 2000);");
 		WebDriverWait wait = new WebDriverWait(driver, 50);
 		wait.until(ExpectedConditions.urlToBe("https://www.advantageonlineshopping.com/#/"));
 	}

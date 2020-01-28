@@ -9,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class DriverElement {
 	static WebDriver driver;
 
+	
 	public static WebDriver getChromeDriver(){
 
 		driver = new ChromeDriver();
@@ -17,7 +18,7 @@ public class DriverElement {
 		driver.manage().window().setSize(new Dimension(1200, 800));
 		return driver;
 	}
-	
+
 	public static void quitDriver(WebDriver driver) {
 		if(driver != null)
 			driver.quit();

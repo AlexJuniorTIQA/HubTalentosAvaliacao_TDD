@@ -49,7 +49,7 @@ public class ConsultaProdutoTelaInicial {
 		ExcelUtils.setExcelFile(Constant.File_DataUserRegister,"Mice");
 		
 		productPage.ClickEelementHPEliteBookFolioDetails();
-		
+		productPage.assertEqualsProduct("HP CHROMEBOOK 14 G1(ES)");
 		Screenshot.getScreenShot(driver, "TestaConsultaTelaPrincipalFalha");
 
 	}

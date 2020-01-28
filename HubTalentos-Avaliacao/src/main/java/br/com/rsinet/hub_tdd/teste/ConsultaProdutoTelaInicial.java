@@ -42,4 +42,13 @@ public class ConsultaProdutoTelaInicial {
 		productPage.assertEqualsProduct(ExcelUtils.getCellData(3, 1));
 		Screenshot.getScreenShot(driver, "TesteConsultaTelaPrincipalSucesso ");
 	}
+	
+	@Test
+	public void ConsultarProdutoFalha ()throws Exception  {
+		ProductPage productPage = PageFactory.initElements(driver, ProductPage.class);
+		ExcelUtils.setExcelFile(Constant.File_DataUserRegister,"Mice");
+		
+		productPage.ClickEelementHPEliteBookFolioDetails();
+
+	}
 }

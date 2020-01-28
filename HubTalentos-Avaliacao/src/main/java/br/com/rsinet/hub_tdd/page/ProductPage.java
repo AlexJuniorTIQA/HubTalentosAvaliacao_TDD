@@ -22,6 +22,9 @@ public class ProductPage {
 	@FindBy(how = How.XPATH, using = "/html/body/div[3]/section/article/div[3]/div/label/span")
 	private WebElement elementNotFound;
 	
+	@FindBy(how = How.XPATH, using = "/html/body/div[3]/section/article[4]/div/div[2]/a/label")
+
+	private WebElement elementHPEliteBookFolioDetails;
 	
 	public ProductPage(WebDriver driver) {
 
@@ -35,4 +38,7 @@ public class ProductPage {
 		Assert.assertEquals("No results for \""+expected+"\"", elementNotFound.getText());
 	}
 	
+	public void ClickEelementHPEliteBookFolioDetails() {
+		elementHPEliteBookFolioDetails.click(); 
+	}
 }

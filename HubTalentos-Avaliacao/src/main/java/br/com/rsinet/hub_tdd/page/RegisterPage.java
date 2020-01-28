@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.Select;
 
-public class PageRegister {
+public class RegisterPage {
 
 	final WebDriver driver;
 	///////////// Elements: Account Details////////////////
@@ -75,7 +75,7 @@ public class PageRegister {
 	private WebElement elementButtonRegister;
 
 	////////////////////////////////////////////////////////
-	public PageRegister(WebDriver driver) {
+	public RegisterPage(WebDriver driver) {
 
 		this.driver = driver;
 	}

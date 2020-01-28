@@ -11,7 +11,7 @@ import br.com.rsinet.hub_tdd.files.ExcelUtils;
 import br.com.rsinet.hub_tdd.files.Screenshot;
 import br.com.rsinet.hub_tdd.page.DriverElement;
 import br.com.rsinet.hub_tdd.page.HomePage;
-import br.com.rsinet.hub_tdd.page.PageRegister;
+import br.com.rsinet.hub_tdd.page.RegisterPage;
 
 public class CadastroCliente {
 
@@ -33,34 +33,34 @@ public class CadastroCliente {
 	@Test
 	public void NovoUsuarioComSucesso() throws Exception {
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
-		PageRegister pageRegister = PageFactory.initElements(driver, PageRegister.class);
+		RegisterPage registerPage = PageFactory.initElements(driver, RegisterPage.class);
         ExcelUtils.setExcelFile(Constant.File_DataUserRegister,"Users");
 		
 		homePage.clickIconuser();
 		homePage.clickCreatNewAccount();
 		
-		pageRegister.setUserName(ExcelUtils.getCellData(1,1));
-		pageRegister.setEmail(ExcelUtils.getCellData(1,2));
-		pageRegister.setPassword(ExcelUtils.getCellData(1,3));
-		pageRegister.setConfirmPassword(ExcelUtils.getCellData(1,3));
+		registerPage.setUserName(ExcelUtils.getCellData(1,1));
+		registerPage.setEmail(ExcelUtils.getCellData(1,2));
+		registerPage.setPassword(ExcelUtils.getCellData(1,3));
+		registerPage.setConfirmPassword(ExcelUtils.getCellData(1,3));
 
-		pageRegister.setFirstName(ExcelUtils.getCellData(1,4));
-		pageRegister.setLastName(ExcelUtils.getCellData(1,5));
-		pageRegister.setPhoneNumber(ExcelUtils.getCellData(1,6));
+		registerPage.setFirstName(ExcelUtils.getCellData(1,4));
+		registerPage.setLastName(ExcelUtils.getCellData(1,5));
+		registerPage.setPhoneNumber(ExcelUtils.getCellData(1,6));
 
-		pageRegister.selectCountry(ExcelUtils.getCellData(1,7));
-		pageRegister.setCity(ExcelUtils.getCellData(1,8));
-		pageRegister.setAdress(ExcelUtils.getCellData(1,9));
-		pageRegister.setState(ExcelUtils.getCellData(1,10));
-		pageRegister.setPostalCode(ExcelUtils.getCellData(1,11));
+		registerPage.selectCountry(ExcelUtils.getCellData(1,7));
+		registerPage.setCity(ExcelUtils.getCellData(1,8));
+		registerPage.setAdress(ExcelUtils.getCellData(1,9));
+		registerPage.setState(ExcelUtils.getCellData(1,10));
+		registerPage.setPostalCode(ExcelUtils.getCellData(1,11));
 		
-		pageRegister.clickCheckConditionsOfUse();
-		pageRegister.clickButtonRegister();
+		registerPage.clickCheckConditionsOfUse();
+		registerPage.clickButtonRegister();
 
 		homePage.waitHome();
 
 		homePage.assertEqualsUser(ExcelUtils.getCellData(1,1));
-		Screenshot.getScreenShot(driver, "TesteNovoUsuárioComSucesso ");
+		Screenshot.getScreenShot(driver, "TesteNovoUsuário_Sucesso ");
 	}
 	
 	
@@ -68,32 +68,32 @@ public class CadastroCliente {
 	@Test
 	public void NovoUsuarioComFalhaB() throws Exception {
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
-		PageRegister pageRegister = PageFactory.initElements(driver, PageRegister.class);
+		RegisterPage registerPage = PageFactory.initElements(driver, RegisterPage.class);
         ExcelUtils.setExcelFile(Constant.File_DataUserRegister,"Users");
 		
 		homePage.clickIconuser();
 		homePage.clickCreatNewAccount();
 		
-		pageRegister.setUserName(ExcelUtils.getCellData(1,1));
-		pageRegister.setEmail(ExcelUtils.getCellData(1,2));
-		pageRegister.setPassword(ExcelUtils.getCellData(1,3));
-		pageRegister.setConfirmPassword(ExcelUtils.getCellData(1,3));
+		registerPage.setUserName(ExcelUtils.getCellData(1,1));
+		registerPage.setEmail(ExcelUtils.getCellData(1,2));
+		registerPage.setPassword(ExcelUtils.getCellData(1,3));
+		registerPage.setConfirmPassword(ExcelUtils.getCellData(1,3));
 
-		pageRegister.setFirstName(ExcelUtils.getCellData(1,4));
-		pageRegister.setLastName(ExcelUtils.getCellData(1,5));
-		pageRegister.setPhoneNumber(ExcelUtils.getCellData(1,6));
+		registerPage.setFirstName(ExcelUtils.getCellData(1,4));
+		registerPage.setLastName(ExcelUtils.getCellData(1,5));
+		registerPage.setPhoneNumber(ExcelUtils.getCellData(1,6));
 
-		pageRegister.selectCountry(ExcelUtils.getCellData(1,7));
-		pageRegister.setCity(ExcelUtils.getCellData(1,8));
-		pageRegister.setAdress(ExcelUtils.getCellData(1,9));
-		pageRegister.setState(ExcelUtils.getCellData(1,10));
-		pageRegister.setPostalCode(ExcelUtils.getCellData(1,11));
+		registerPage.selectCountry(ExcelUtils.getCellData(1,7));
+		registerPage.setCity(ExcelUtils.getCellData(1,8));
+		registerPage.setAdress(ExcelUtils.getCellData(1,9));
+		registerPage.setState(ExcelUtils.getCellData(1,10));
+		registerPage.setPostalCode(ExcelUtils.getCellData(1,11));
 
-		pageRegister.clickCheckConditionsOfUse();
-		pageRegister.clickButtonRegisterFail();
+		registerPage.clickCheckConditionsOfUse();
+		registerPage.clickButtonRegisterFail();
 		
 		
-		pageRegister.assertEqualsRegisterFail();
-		Screenshot.getScreenShot(driver, "TesteNovoUsuárioComFalha ");
+		registerPage.assertEqualsRegisterFail();
+		Screenshot.getScreenShot(driver, "TesteNovoUsuário_Falha ");
 	}
 }

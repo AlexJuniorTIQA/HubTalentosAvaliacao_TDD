@@ -34,9 +34,9 @@ public class ConsultaProdutoTelaInicial {
 	public void ConsultarProdutoSucesso ()throws Exception  {
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		ProductPage productPage = PageFactory.initElements(driver, ProductPage.class);
-		ExcelUtils.setExcelFile(Constant.File_DataUserRegister,"Mice");
-		
-		homePage.javaScriptClick(By.id("miceTxt"));
+		ExcelUtils.setExcelFile(Constant.File_DataUserRegister,"Mice");		
+
+		homePage.clickMice();
 		homePage.findElementLinkText(ExcelUtils.getCellData(3, 1));
 		
 		productPage.assertEqualsProduct(ExcelUtils.getCellData(3, 1));
@@ -49,6 +49,8 @@ public class ConsultaProdutoTelaInicial {
 		ExcelUtils.setExcelFile(Constant.File_DataUserRegister,"Mice");
 		
 		productPage.ClickEelementHPEliteBookFolioDetails();
+		
+		Screenshot.getScreenShot(driver, "TestaConsultaTelaPrincipalFalha");
 
 	}
 }

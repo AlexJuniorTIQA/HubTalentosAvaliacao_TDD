@@ -155,6 +155,10 @@ public class RegisterPage {
 		elementButtonRegister.click();
 		elementButtonRegister.click();
 		elementButtonRegister.click();
+		elementButtonRegister.click();
+		elementButtonRegister.click();
+		
+		
 	}
 	
 	
